@@ -1,0 +1,8 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hello! 👋 on Danyil</title><link>https://danyil.xyz/</link><description>Recent content in Hello! 👋 on Danyil</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 03 Oct 2022 17:32:17 -0400</lastBuildDate><atom:link href="https://danyil.xyz/index.xml" rel="self" type="application/rss+xml"/><item><title>Announcing Writings</title><link>https://danyil.xyz/posts/my-first-post/</link><pubDate>Mon, 03 Oct 2022 17:32:17 -0400</pubDate><guid>https://danyil.xyz/posts/my-first-post/</guid><description>
+&lt;p>Hey! Welcome to my website.&lt;/p>
+&lt;p>I&amp;rsquo;ve decided to add a writing section with the intent of sharing medium-to-long-form essays on the topics listed on the Writings page.&lt;/p>
+&lt;p>My first article is on a ubiquitous method that&amp;rsquo;s super useful for solving challenging programming Leetcode-style problems that I haven&amp;rsquo;t seen described elsewhere yet&amp;ndash; stay tuned!&lt;/p>
+&lt;p>In the meantime, enjoy this riddle while it lasts (I&amp;rsquo;m deleting this post once my first article comes out!)&lt;/p>
+&lt;blockquote>
+&lt;p>What is so fragile that saying its name breaks it?&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

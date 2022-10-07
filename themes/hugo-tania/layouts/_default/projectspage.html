@@ -1,0 +1,65 @@
+{{ define "main" }}
+
+
+<header>
+    <div class="container">
+        <h1>{{ .Title }}</h1>
+        <p class="subtitle">{{ .Params.subtitle }}</p>
+    </div>
+
+<!-- </header> -->
+
+
+<div class="container">
+    <!-- <section class="my"> -->
+         <!-- Include this div class="article-post" if you want links to be underlined! -->
+         <div class="article-post"> 
+            {{ with .Content }}
+            {{ . }}
+            {{ end }}
+            
+        </div>
+    <!-- </section> -->
+</div>
+
+</header>
+
+
+{{ $projects := where .Site.RegularPages "Type" "in" .Site.Params.projectSections }}
+
+<div class="container">
+
+
+    <section>
+        <h2>Stuff I've Worked On</h2>
+        <div class="projects">
+
+            {{ range $projects.ByWeight }}
+            <div class="project">
+                <div>
+                    <a href="{{ .Params.link }}" target="_blank" rel="noreferrer">
+                        <div class="icon">{{ .Params.icon }}</div>
+                        <h3>{{ .Title }}</h3>
+                    </a>
+                    <div class="description">{{ .Params.description }}</div>
+                </div>
+                <div class="flex">
+                    {{if isset .Params "repo" }}
+                    <a href="{{ .Params.repo }}" class="button" target="_blank" rel="noreferrer">Source</a>
+                    {{ end }}
+
+                    {{if isset .Params "demo" }}
+                    <a href="{{ .Params.demo }}" class="button" target="_blank" rel="noreferrer">Show Me!</a>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+
+        </div>
+    </section>
+
+
+
+</div>
+
+{{ end }}

@@ -1,0 +1,54 @@
+{{ define "main" }}
+   
+<header>
+    <div class="container">
+        <h1>{{ .Title }}</h1>
+        <p class="subtitle">{{ .Params.subtitle }}</p>
+    </div>
+
+<!-- </header> -->
+
+
+<div class="container">
+    <!-- <section class="my"> -->
+        <!-- <div class="article-post"> -->
+            {{ with .Content }}
+            {{ . }}
+            {{ end }}
+            
+        <!-- </div> -->
+    <!-- </section> -->
+</div>
+
+</header>
+
+<!-- 
+<div class="container">
+    {{ if .Section }}
+    <nav class="flex container suggested">
+        {{ with .PrevInSection }}
+        <a rel="prev" href="{{ .RelPermalink }}" title="Previous post (older)">
+            <span>Previous</span>
+            {{ .Title }}
+            </a>
+        {{ end }}
+        
+        {{ with .NextInSection }}
+        <a rel="next" href="{{ .RelPermalink }}" title="Next post (newer)">
+            <span>Next</span>
+            {{ .Title }}
+            </a> 
+        {{ end }}
+    </nav>
+    {{ end }}
+</div>
+-->
+
+{{ if or (not (isset .Params "comments")) (eq .Params.comments "true")}} 
+<div class="container">
+    {{ partial "comments/include" . }}
+</div>
+{{ end }}
+</main>
+
+{{ end }}

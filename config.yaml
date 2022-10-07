@@ -1,0 +1,82 @@
+baseURL: 'https://danyil.xyz/'
+languageCode: 'en-us'
+title: "Danyil"
+theme: 'hugo-tania'
+ 
+params:
+  titleEmoji:
+
+  titleLogo:
+
+  enableFootnotes: true
+
+  siteName: "Danyil"
+  siteDesc: "Danyil's Site"
+  author: "Danyil Blyschak"
+
+  colorScheme:
+    toggle: true
+    default: auto
+
+  maxCategoryToShow: 10
+
+  comments:
+    enabled: false
+
+  mainSections:
+    - posts
+    - project_files
+  
+  postSections:
+    - posts
+
+  projectSections:
+    - project_files
+
+  homePageParams:
+    postsToShow: 3
+    projectsToShow: 1
+
+  socialOptions:
+    github: https://github.com/therealdarkknight
+    twitter: https://twitter.com/danblys
+    linkedin: https://www.linkedin.com/in/danyilblyschak/
+    email: danyilblyschak@gmail.com
+    
+  
+
+  #titleEmoji: 👨🏼‍🔬
+
+menu:
+  header:
+    - identifier: writings_page
+      name: Writings 📜
+      url: "/Writings/"
+      weight: 10
+    - identifier: projects_page
+      name: Projects 🚀
+      url: "/Projects/"
+      weight: 20
+    - identifier: future_page
+      name: Future 🔮
+      url: "/Future/"
+      weight: 30
+  
+  #footer:
+  #  - name: RSS
+  #    url: "/index.xml"
+
+markup:
+  highlight:
+    noClasses: false
+    lineNos: true
+  goldmark:
+    renderer:
+      unsafe: true
+
+outputs:
+  home: ["HTML", "RSS", "JSON"]
+
+
+
+

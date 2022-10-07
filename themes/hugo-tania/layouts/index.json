@@ -1,0 +1,7 @@
+{{- $pages := where .Site.RegularPages "Type" "in" .Site.Params.postSections -}}
+{{- $.Scratch.Add "index" slice -}}
+{{- range $pages -}}
+    {{- $date := .Date.Format "Jan 02"}}
+    {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "categories" .Params.categories "contents" .Plain "permalink" .Permalink "date" $date) -}}
+{{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}

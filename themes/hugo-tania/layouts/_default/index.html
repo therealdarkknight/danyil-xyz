@@ -1,0 +1,174 @@
+{{ define "main" }}
+
+<header>
+    <div class="container">
+        <h1 id="typewriter1"><noscript>{{ .Title }}</noscript></h1>
+        <p id="typewriter2" class="subtitle"><noscript>{{ .Params.subtitle }}</noscript></p>
+    </div>
+    <!-- </header> -->
+   <div class="container"> 
+      <!-- <section class="my"> -->
+        <div class="content">
+
+            {{ with .Content }}
+            <span id="typewriter3"><noscript>{{ . }}</noscript></span>
+            {{ end }}
+        
+        </div>
+         
+    <!-- </section> -->
+    </div> 
+
+</header>
+<!-- These typewriter scripts are HIGHLY specialized for the text on my site... proceed with caution-->
+<script>
+    var i = 0;
+    var txt = {{ .Title }};
+    var speed = 60;
+    
+
+    function typeWriter() {
+      if (i < txt.length) {
+        document.getElementById("typewriter1").innerHTML += txt.charAt(i);
+
+        // deal with emoji (emoji must be after the !, and be the final character)
+        if(txt.charAt(i) == '!') {
+            setTimeout(function(){
+                document.getElementById("typewriter1").innerHTML = txt;
+            }, speed);
+            
+            return;
+        }
+        else{ 
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+      }
+    }
+
+    var i2 = 0;
+    var txt2 = {{ .Params.subtitle }};
+    var speed2 = 30;
+    
+    function typeWriter2() {
+      if (i2 < txt2.length) {
+        document.getElementById("typewriter2").innerHTML += txt2.charAt(i2);
+        i2++;
+        setTimeout(typeWriter2, speed2);
+      }
+    }
+
+
+    // We assume .Content exists...
+
+    var i3 = 0;
+    var txt3 = {{ .Content }};
+    var speed3 = 20;
+    
+
+    // Accounts for HTML tags
+    function typeWriter3() {
+        let i3 = 0;
+        let element = document.getElementById("typewriter3");
+  
+        let timer = setInterval(function() {
+        const char = txt3[i3];
+    
+        // deal with html tags
+    if (char === '<') {
+      i3 = txt3.indexOf('>', i3);  // skip to greater-than
+    }
+
+    // deal with httml codes (like the one for an apostrophe ')
+    if(char === '&') {
+        i3 = txt3.indexOf(';', i3) + 1;
+    }
+    
+    element.innerHTML = txt3.slice(0, i3);
+    
+    if (++i3 === txt3.length) {
+      clearInterval(timer);
+    }
+  }, speed3);
+    }
+
+
+    setTimeout(typeWriter, 100);
+    setTimeout(typeWriter2, 500 + 100);
+    setTimeout(typeWriter3, 1300 + 100);
+    
+</script>
+
+
+
+<!-- Swapping articles and pages line order here doesn't make it work? Somehow the querying breaks!-->
+{{ $posts := where .Site.RegularPages "Type" "in" .Site.Params.postSections }}
+{{ $projects := where .Site.RegularPages "Type" "in" .Site.Params.projectSections }}
+{{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+
+{{ $posts = .Paginate ($posts)  }}
+{{ $pages = .Paginate ($pages)  }}
+
+{{ $archivesPage := first 1 (where .Site.RegularPages "Layout" "eq" "archives") }}
+{{ $projectPage := first 1 (where .Site.RegularPages "Layout" "eq" "projectspage")}}
+
+<div class="container">
+    <section>
+        <h2>
+            Latest Articles
+            {{ range $archivesPage }}
+            <a class="section-button" href="{{ .RelPermalink }}">View all</a>
+            {{ end }}
+        </h2>
+        <div class="posts">
+            {{ range first .Site.Params.homePageParams.postsToShow $posts.Pages }}
+            <div class="post">
+                <a href="{{ .RelPermalink }}">
+                    <div class="post-row">
+                        <time>{{ .Date.Format "Jan 02" }}</time>
+                        <h3>{{ .Title }}</h3>
+                    </div>
+                    <!--<div class="new-post">New!</div>-->
+                </a>
+            </div>
+            {{ end }}
+        </div>
+    </section>
+    {{ if gt (len $projects) 0}}
+    <section>
+        <h2>
+            Projects
+            {{ range $projectPage }}
+            <a class="section-button" href="{{ .RelPermalink }}">View all</a>
+            {{ end }}
+
+
+        </h2>
+        <div class="projects">
+            {{ range first .Site.Params.homePageParams.projectsToShow $projects.ByWeight }}
+            <div class="project">
+                <div>
+                    <a href="{{ .Params.link }}" target="_blank" rel="noreferrer">
+                        <div class="icon">{{ .Params.icon }}</div>
+                        <h3>{{ .Title }}</h3>
+                    </a>
+                    <div class="description">{{ .Params.description }}</div>
+                </div>
+                <div class="flex">
+                    {{if isset .Params "repo" }}
+                    <a href="{{ .Params.repo }}" class="button" target="_blank" rel="noreferrer">Source</a>
+                    {{ end }}
+
+                    {{if isset .Params "demo" }}
+                    <a href="{{ .Params.demo }}" class="button" target="_blank" rel="noreferrer">Show me!</a>
+                    {{ end }}
+                    <!-- <a href="{{ .Params.repo }}" class="button" target="_blank" rel="noreferrer">Demo</a> -->
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+</div>
+
+{{ end }}

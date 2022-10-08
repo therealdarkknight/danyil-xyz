@@ -1,5 +1,5 @@
 #baseURL: 'https://danyil.xyz/'
-baseURL: 'https://therealdarkknight.github.io/danyil-xyz/'
+baseURL: 'https://therealdarkknight.github.io/'
 languageCode: 'en-us'
 title: "Danyil"
 theme: 'hugo-tania'
